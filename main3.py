@@ -29,8 +29,11 @@ def main(arguments):
         
         center_list= [center]
         center_info= imported_df_uno[imported_df_uno['Centro deportivo'].isin(center_list)]
+        
+        print('Buena eleccción madrileñito! Como verás en Madrid está todo cerca:')
+        print ("")
         print(center_info)
-        print('Buena eleccción madrileñito!')
+        print ("")
 
 
 

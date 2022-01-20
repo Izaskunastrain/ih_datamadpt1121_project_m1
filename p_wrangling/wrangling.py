@@ -41,13 +41,13 @@ def wrangling_function(df_bicimad_raw,df_sport_centers_raw):
     
     # SPORT CENTERS 
     # We first remove empty values 
-    df_sport_centers_raw= df_sport_centers_raw.dropna()
+    df_sport_centers_raw_clean= df_sport_centers_raw.dropna()
     
     # I create the new column location_centros applying the function to_mercator on latitude and longitude 
-    df_sport_centers_raw['location_centros']= df_sport_centers_raw.apply(lambda x: to_mercator (x['location.latitude'], x['location.longitude']), axis=1)
+    df_sport_centers_raw_clean['location_centros']= df_sport_centers_raw_clean.apply(lambda x: to_mercator (x['location.latitude'], x['location.longitude']), axis=1)
     
     # I keep only the columns I am interested in
-    df_sport_centers= df_sport_centers_raw [['title', 'address.street-address', 'location.latitude', 'location.longitude', 'location_centros'] ]
+    df_sport_centers= df_sport_centers_raw_clean [['title', 'address.street-address', 'location.latitude', 'location.longitude', 'location_centros'] ]
     
     #MERGE BOTH DATAFRAMES
     
@@ -56,12 +56,18 @@ def wrangling_function(df_bicimad_raw,df_sport_centers_raw):
     # Calculate the distance between the combination of all bicimad points and all sport center points  
     df_merged['Distance']= df_merged.apply(lambda x: distance_meters (x ['location_bicimad'], x ['location_centros']),axis=1 )
     
-    # I create a table with the minimum distances grouped bye sport center
+    # I create a table with the minimum distances grouped by sport center
     min_distances= df_merged.groupby('title')['Distance'].min().reset_index()
     
     # I merge with the df_merged table to obtain more than the title and Distance columns
     df_final = min_distances.merge(df_merged, how='left', on = ['Distance', 'title'])
-    return df_final
+
+    # I keep only the columns I am interested in and renamed them to something understandable
+
+    df_final_short= df_final[['title','address.street-address', 'name', 'address']]
+    df_final_renamed= df_final_short.rename({'title': 'Centro deportivo', 'address.street-address': 'Dirección del centro', 'name': 'Estación BiciMAD', 'address': 'Dirección BiciMAD'}, axis=1)
+    
+    return df_final_renamed
 
 
     

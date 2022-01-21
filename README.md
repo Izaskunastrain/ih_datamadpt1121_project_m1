@@ -19,7 +19,7 @@ With `--u`, Sporty Ayuso will tell ONE sport center the closest Bicimad station
 
 ### :computer: **Technology stack**
 The main technologies used here are python and pandas (beginner level) 
-And he libraries used are: 
+And the libraries used are: 
 - pandas
 - request
 - re

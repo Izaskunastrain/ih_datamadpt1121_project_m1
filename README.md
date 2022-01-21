@@ -14,9 +14,10 @@ This project is just the first draft done by a humble Isabel lover doing its fir
 ### :running: **How to ASK SPORTY AYUSO**
 ASK SPORTY AYUSO 
 
-With `--t`, Sporty Ayuso will tell you ALL sport centers in Madrid with their closest Bicimad station
-With `--u`, Sporty Ayuso will tell ONE sport center the closest Bicimad station
-
+With `--h`, Sporty Ayuso will start with a personalized hello message from Isabel.
+With `--d`, Sporty Ayuso will help you decide if you should do sport today or not.
+With `--a`, Sporty Ayuso will tell you ALL sport centers in Madrid with their closest Bicimad station
+With `--o`, Sporty Ayuso will tell ONE sport center the closest Bicimad station
 ### :computer: **Technology stack**
 The main technologies used here are python and pandas (beginner level) 
 And the libraries used are: 

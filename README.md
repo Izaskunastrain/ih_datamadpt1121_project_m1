@@ -4,9 +4,9 @@
 ### :raising_hand: **Hello and welcome to ASK SPORTY AYUSO** 
 ASK SPORTY AYUSO aims to bring closer the passion for sports of our leader, Isabel Diaz Ayuso, to all citizens of the world living (of course) in Madrid.  
 ASK AYUSO can grant you one of these three wishes:
-1) Tell you ALL sport centers in Madrid with their closest Bicimad station 
-2) Tell you for ONE sport center the closest Bicimad station 
-3) Decide for you if you should do today sport or not (recommended option)
+1) Decide for you if you should do today sport or not (recommended option)
+2) Tell you ALL sport centers in Madrid with their closest Bicimad station 
+3) Tell you for ONE sport center the closest Bicimad station 
 
 ### :see_no_evil: **From an Isabel fan to the world**
 This project is just the first draft done by a humble Isabel lover doing its first repository and project in Ironhack.
@@ -26,12 +26,15 @@ And the libraries used are:
 - re
 - Point from shapely.geometry
 - geopandas
+- fuzzy wuzzy
 
 
 ### :boom: **Core technical concepts and inspiration**
 In order to not to make Ayuso lovers wait too much for their information, the acquisition and analysis of the information is done in advance with the file "Ayuso_updates.py". 
 When executing "Ayuso_updates.py". file, the information from Madrid sport centers is read and updated from the REST API from the Open Data Portal of the Madrid City Council. 
-When executing "Ask_Sporty_Ayuso".py it only asks the Ayuso lovers what information they would like to receive and therefore, the time it takes to respond reduces from more than 10s to less than 3s. 
+When executing "Ask_Sporty_Ayuso".py it only asks the Ayuso lovers what information they would like to receive and therefore, the time it takes to respond reduces from more than 10s to less than 3s. /
+
+Also, in another topic, the library fuzzy wuzzy has been used to search for the most similar sport center according to the user input as the sport center names are quite long and difficult to type exactly. 
 
 ### :wrench: **Configuration**
 We recomend having the latest version of python for executing ASK SPORTY AYUSO. 
@@ -42,11 +45,10 @@ Please note that Bicimad information is read from a csv file that was downloaded
 ### :file_folder: **Folder structure**
 ```
 └── project
-    ├── main.py
-    ├── main2.py
+    ├── Ask_Sporty_Ayuso.py
+    ├── Ayuso_updates.py
     ├── .gitignore
     ├── README.md
-    ├── main_script.py
     ├── notebooks
     │   ├── notebook1.ipynb
     │   └── notebook2.ipynb

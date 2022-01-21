@@ -12,10 +12,10 @@ from p_wrangling import wrangling as mwr
 # Argument parser function
 
 def argument_parser():
-    parser = argparse.ArgumentParser(description='Bienvenido al consultorio de Ayuso amigo madrileño deportista! ¿En qué necesitas que te ayude hoy? Escribe:')
+    parser = argparse.ArgumentParser(description='❤ Bienvenido al consultorio de Ayuso amigo madrileño deportista!❤ / ¿En qué necesitas que te ayude hoy? Escribe:')
     parser.add_argument("-d", "--decide", help="Si necesitas ayuda decidiendo si hoy deberías hacer deporte o no", action='store_true')
     parser.add_argument("-a", "--all", help="Si quieres ver todos los centros deportivos de Madrid con sus paradas de bicimad más cercanas", action='store_true')
-    parser.add_argument("-o", "--one", help="Si te has decidido por uno y quieres que te de su información", action='store_true')
+    parser.add_argument("-o", "--one", help="Si quieres buscar un centro concreto y quieres que te de su información", action='store_true')
     args = parser.parse_args()
     return args
 
@@ -40,7 +40,7 @@ def main(arguments):
     elif arguments.one:
         print ("")
       
-        center_input = str(input('   Escribe el centro deportivo que te interesa:   '))
+        center_input = str(input('   Escribe el centro que buscas:   '))
         
         imported_df_test= acq.acquisition_bicimad("./data/bicimad_sport_center_distance.csv")
         imported_df_test['Similarity'] = imported_df_test.apply(lambda x: mwr.fuzzy_wuzzy(x['Centro deportivo'], center_input),axis=1)
@@ -59,10 +59,11 @@ def main(arguments):
         print ("")
         print(center_info)
         print ("")
-        print ("   Te abro tambien un mapa donde  puedes ver las bicis disponibles de cada estación de bicimad en tiempo real. De nadita!")
+        print ("  ✦✦ Te abro tambien un mapa donde  puedes ver las bicis disponibles de cada estación de bicimad en tiempo real. De nadita! ✦✦")
+        print ("")
         time.sleep(7)
         webbrowser.open("https://u.bicimad.com/mapa")
-        time.sleep(20)
+        time.sleep(10)
         webbrowser.open("https://pbs.twimg.com/media/Exyw4sGUYAkbOvW.jpg")   
 
 

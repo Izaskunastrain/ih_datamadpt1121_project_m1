@@ -2,6 +2,8 @@ import argparse
 import random
 import webbrowser
 import time
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 
 from p_acquisition import acquisition as acq
 from p_wrangling import wrangling as mwr
@@ -33,17 +35,25 @@ def main(arguments):
         print("")
         print('Ya tienes toda la info actualizada en tu carpetita. Guau!')
         print("")
+           
         
-
     elif arguments.one:
         print ("")
-        print ("ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
-        center = input('   Escribe el centro deportivo que te interesa:   ')
+      
+        center_input = str(input('   Escribe el centro deportivo que te interesa:   '))
         
-        imported_df_uno= acq.acquisition_bicimad("./data/bicimad_sport_center_distance.csv")
+        imported_df_test= acq.acquisition_bicimad("./data/bicimad_sport_center_distance.csv")
+        imported_df_test['Similarity'] = imported_df_test.apply(lambda x: mwr.fuzzy_wuzzy(x['Centro deportivo'], center_input),axis=1)
+
+        column = imported_df_test["Similarity"]
+        max_value = str(column.max())
+        similarity_string= "Similarity"+"=="+max_value
+        closest_center= imported_df_test.query(similarity_string)['Centro deportivo']
+        closest_center_string= closest_center.to_string(index=False)
+        closest_center_to_list= [closest_center_string]
         
-        center_list= [center]
-        center_info= imported_df_uno[imported_df_uno['Centro deportivo'].isin(center_list)]
+        
+        center_info= imported_df_test[imported_df_test['Centro deportivo'].isin(closest_center_to_list)]
         print ("")
         print('    Buena eleccción madrileñito! ')
         print ("")
@@ -53,7 +63,7 @@ def main(arguments):
         time.sleep(7)
         webbrowser.open("https://u.bicimad.com/mapa")
         time.sleep(20)
-        webbrowser.open("https://pbs.twimg.com/media/Exyw4sGUYAkbOvW.jpg")
+        webbrowser.open("https://pbs.twimg.com/media/Exyw4sGUYAkbOvW.jpg")   
 
 
 

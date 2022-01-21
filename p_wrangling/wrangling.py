@@ -1,6 +1,13 @@
 import pandas as pd
 from shapely.geometry import Point
 import geopandas as gpd
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+
+
+
+def fuzzy_wuzzy (name_sport_center, input_user):
+    return fuzz.ratio(name_sport_center, input_user)
 
 def wrangling_function(df_bicimad_raw,df_sport_centers_raw):
     
@@ -70,4 +77,10 @@ def wrangling_function(df_bicimad_raw,df_sport_centers_raw):
     return df_final_renamed
 
 
+
+
+
+
+
+    
     

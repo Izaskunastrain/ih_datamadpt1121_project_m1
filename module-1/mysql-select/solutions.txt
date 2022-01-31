@@ -1,0 +1,61 @@
+Challenge 1 - Who Have Published What At Where?
+
+SELECT
+au.au_id as "Author ID",
+au.au_lname as "Last name",
+au.au_fname as "First name",
+t.title as "Title",
+p.pub_name  as "Publisher"
+FROM authors as au
+INNER JOIN titleauthor as tit ON au.au_id = tit.au_id 
+INNER JOIN titles as t ON tit.title_id= t.title_id
+INNER JOIN publishers as p ON t.pub_id=p.pub_id
+
+
+
+Challenge 2 - Who Have Published How Many At Where?
+
+SELECT
+au.au_id as "Author ID",
+au.au_lname as "Last name",
+au.au_fname as "First name",
+t.title as "Title",
+p.pub_name  as "Publisher",
+COUNT(t.title_id) as "Title count"
+FROM authors as au
+INNER JOIN titleauthor as tit ON au.au_id = tit.au_id 
+INNER JOIN titles as t ON tit.title_id= t.title_id
+INNER JOIN publishers as p ON t.pub_id=p.pub_id
+GROUP BY "Author ID", "Publisher"
+
+Challenge 3 - Best Selling Authors
+
+SELECT
+au.au_id as "Author ID",
+au.au_lname as "Last name",
+au.au_fname as "First name",
+COUNT(t.title_id) as "Total"
+FROM authors as au
+INNER JOIN titleauthor as tit ON au.au_id = tit.au_id 
+INNER JOIN titles as t ON tit.title_id= t.title_id
+GROUP BY "Author ID"
+ORDER BY "Total" DESC 
+LIMIT 3
+
+Challenge 4 - Best Selling Authors Ranking
+
+SELECT
+au.au_id as "Author ID",
+au.au_lname as "Last name",
+au.au_fname as "First name",
+COUNT(t.title_id) as "Total"
+FROM authors as au
+LEFT JOIN titleauthor as tit ON au.au_id = tit.au_id 
+LEFT JOIN titles as t ON tit.title_id= t.title_id
+GROUP BY "Author ID"
+ORDER BY "Total" DESC 
+
+
+
+
+
